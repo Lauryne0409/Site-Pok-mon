@@ -3,7 +3,7 @@
 $font-1: "font-1", sans-serif;
 $font-2: "font-2", sans-serif;
 
-$color-1: #546fe4;
+$color-1: #383bf0;
 $color-2: #212040;
 $color-3: rgb(100, 100, 100);
 $black: #060d2c;
@@ -18,7 +18,7 @@ $white: rgb(238, 238, 238);
 
 body {
   background: $color-2;
-  color: $white;
+  color: $white !important;
 }
 .result {
   display: flex;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from './Card';
+import CardS from './CardShiny';
 import axios from "axios"
 
 const Pokemons = () => {
@@ -64,35 +64,12 @@ const Pokemons = () => {
                 }
             })
             .map((pokemons,index) => (
-                <Card index={index+1} pokemons={pokemons} />
+                <CardS index={index+1} pokemons={pokemons} />
             ))}
         </div>
       </div>
       </div>
     </div>
-    /*
-        <div className="pokemons">
-            <h1>Pokémon</h1>
-            <ul className="radio-container">
-                <input 
-                    type="range" 
-                    min="1" 
-                    max="1154" 
-                    defaultValue={rangeValue} 
-                    onChange={(e)=> setRangeValue(e.target.value)}>
-                </input>
-            </ul>
-            <div className="pokemonConteneur">
-                {
-                    data
-                    .slice(0,rangeValue)
-                    .map((pokemons,index) => (
-                    <Card index={index+1} pokemons={pokemons} />
-                    ))
-                }
-            </div>
-        </div>
-        */
     );
 };
 
