@@ -1,0 +1,116 @@
+.pokemonConteneur{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  flex-direction: row;
+  justify-content: center; 
+}
+.card {
+  position:relative;
+  flex: 1 0 25%;
+  min-width: 260px;
+  max-width: 280px;
+  background: #060d2c;
+  border-radius: 20px;
+  margin: 15px;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 90px;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(195, 34, 34, 0) 0%, $black 55%);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    border-radius: 0 0 30px 30px;
+  }
+
+  img {
+    height: 254px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50px;
+    box-shadow: 0 8px 1px rgba(255, 255, 255, 0.1),
+      0 16px 1px rgba(255, 255, 255, 0.05);
+  }
+  h2 {
+    margin: 24px 0 0px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    text-align: center;
+  }
+  h5 {
+    color: $color-3;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+  h4 {
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    margin-top: -4px;
+
+    span {
+      font-size: 0.7rem;
+    }
+  }
+  ul {
+    position:relative;
+    margin: 6px 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  li {
+    position:relative;
+    background: #212040;
+    border-radius: 18px;
+    padding: 0px 7px;
+    margin: 0 4px 4px 0;
+    font-size: 1.1rem;
+
+    &:first-child {
+      margin-left: -4px;
+    }
+  }
+  h3 {
+    letter-spacing: 1px;
+    font-size: 1.4rem;
+    margin-top: 10px;
+  }
+  p {
+    padding-top: 5px;
+    color: white;
+    font-size: 1.3rem;
+    line-height: 20px;
+    height: 100px;
+    overflow-y: scroll;
+    text-align: center;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .btn {
+    background: #546fe4;
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 0;
+    width: 150px;
+    text-align: center;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 50;
+
+    &:hover {
+      background: #212040;
+      box-shadow: 0 0 10px #546ee4d2;
+      font-size: 1.025rem;
+    }
+  }
+}
