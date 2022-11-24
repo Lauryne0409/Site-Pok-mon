@@ -13,6 +13,7 @@ const Pokemons = () => {
             .get(`https://pokeapi.co/api/v2/pokemon?limit=905`)
             .then((res) => setData(res.data.results));
     }, [search])
+    
     return(
     <div className="form-component">
       <div className="form-container">
