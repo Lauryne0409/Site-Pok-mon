@@ -258,7 +258,7 @@ function getDegaType(types){
 
     for (let y = 0; y < types.length; y++) {
         for (let index = 0; index < 17; index++) {
-            ret[index] = ret[index]*type.get(types[y])[index] 
+            ret[index] = ret[index]*type.get(types[y])[index]  
         }
     } 
     const faible = document.getElementById("faible");
