@@ -2,3 +2,142 @@ tspan {
     line-height: 25px;
     color:  blanchedalmond !important;
   }
+
+  $color_1: #000000;
+  $color_2: #20247b;
+  $color_3: currentColor;
+  $color_4: #fc5356;
+  $background-color_1: #212040;
+  $background-color_2: transparent;
+  
+  /* About Me 
+  ---------------------*/
+  body {
+    color: $color_1;
+    margin-top: 20px;
+  }
+  .section {
+    padding: 100px 0;
+    position: relative;
+  }
+  .gray-bg {
+    background-color: $background-color_1;
+  }
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+    border-style: none;
+  }
+  .about-text {
+    h3 {
+      font-size: 45px;
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
+    h6 {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 18px;
+      max-width: 450px;
+      mark {
+        font-weight: 600;
+        color: $color_2;
+      }
+    }
+  }
+  .about-list {
+    padding-top: 10px;
+    .media {
+      padding: 5px 0;
+    }
+    label {
+      color: #2e30aa;
+      font-size: 18px;
+      font-weight: 600;
+      width: 88px;
+      margin: 0;
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 11px;
+        width: 1px;
+        height: 12px;
+        background: #20247b;
+        -moz-transform: rotate(15deg);
+        -o-transform: rotate(15deg);
+        -ms-transform: rotate(15deg);
+        -webkit-transform: rotate(15deg);
+        transform: rotate(15deg);
+        margin: auto;
+        opacity: 0.5;
+      }
+    }
+    p {
+      font-size: 18px;
+      margin: 0;
+    }
+  }
+  .about-section {
+    .counter-poke {
+      padding: 22px 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
+      .count-data {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .count {
+        font-weight: 700;
+        color: $color_2;
+        margin: 0 0 5px;
+      }
+      p {
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+  }
+  mark {
+    background-image: linear-gradient(rgba(252, 83, 86, 0.6), rgba(252, 83, 86, 0.6));
+    background-size: 100% 3px;
+    background-repeat: no-repeat;
+    background-position: 0 bottom;
+    background-color: $background-color_2;
+    padding: 0;
+    color: $color_3;
+  }
+  .theme-color {
+    color: $color_4;
+  }
+  .dark-color {
+    color: $color_2;
+  }
+  .titre-color {
+    color: #ffffff;
+    text-transform : capitalize;
+  }
+
+  .p-noir {
+    color: #000000;
+  }
+  @media (max-width: 767px) {
+    .about-text {
+      h3 {
+        font-size: 35px;
+      }
+      h6 {
+        font-size: 18px;
+      }
+    }
+  }
+  @media (max-width: 991px) {
+    .about-avatar {
+      margin-top: 30px;
+    }
+  }

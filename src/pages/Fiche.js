@@ -37,13 +37,14 @@ const Fiche = (props) => {
     }, [])
 
     let typeDeux=undefined;
-    let degas=undefined ;
     if(pokemon.types && pokemon.types.length==2){
         typeDeux=pokemon.types[1].type.name
-        degas=pokemon.types && getDegaType([ pokemon.types[0].type.name, pokemon.types[1].type.name])
+        pokemon.types && getDegaType([ pokemon.types[0].type.name, pokemon.types[1].type.name])
     }else{
-        degas=pokemon.types && getDegaType([ pokemon.types[0].type.name ])
+        pokemon.types && getDegaType([ pokemon.types[0].type.name ])
     }
+
+    evolution.chain && getEvolutions(evolution)
 
     const dataState=[
         {subject:"PV", A:pokemon.stats && pokemon.stats[0].base_stat,fullMark: 255},
@@ -55,110 +56,146 @@ const Fiche = (props) => {
     
     return (
         <div>
-            {pokemon && species &&
+            {pokemon && species && evolution &&
             <div >
                 <Navigation />
-                <div className="header">
-                    <h1>N°{id}</h1>
-                </div>
-                <img 
-                    src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+id+'.png'} 
-                    />
-                <img 
-                    src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/'+id+'.png'} 
-                    />  
-                <button className="e"> test </button>
-                <h2>{pokemon.name}</h2> 
-                <h4>Type : {pokemon.types && pokemon.types[0].type.name} {typeDeux}</h4>
-                <h3>Génération : {species.generation && species.generation.name}</h3>
-                <div className="info">
-                    
-                    <br/>
-
-                    <div className="especes">
-                        <h4>Taille : {pokemon.height && pokemon.height/10} m</h4>
-                        <h4>Poids : {pokemon.weight && pokemon.weight/10} Kg</h4>
-                        <h4>Description : {species.flavor_text_entries && species.flavor_text_entries[0].flavor_text}</h4>
-                        <h4>Version de la description : {species.flavor_text_entries && species.flavor_text_entries[0].version.name}</h4>
-                    </div>
-
-                    <br/>
-
-                    <div className="talent">
-                        <h3>Talents : </h3>
-                        <h3>{pokemon.abilities && listeTalent(pokemon.abilities)} </h3>
-                    </div>
-
-                    <br/>
-
-                    <div className="stats">
-                        <h3>Stats de base : </h3>
-                        <h4>Pv : {pokemon.stats && pokemon.stats[0].base_stat}</h4>
-                        <h4>Attaque : {pokemon.stats && pokemon.stats[1].base_stat}</h4>
-                        <h4>Défence : {pokemon.stats && pokemon.stats[2].base_stat}</h4>
-                        <h4>Attaque-Spé : {pokemon.stats && pokemon.stats[3].base_stat}</h4>
-                        <h4>Défence-Spé : {pokemon.stats && pokemon.stats[4].base_stat}</h4>
-                        <h4>Vitesse : {pokemon.stats && pokemon.stats[5].base_stat}</h4>
-                        <h3>Total : {pokemon.stats && pokemon.stats[0].base_stat+pokemon.stats[1].base_stat+pokemon.stats[2].base_stat+pokemon.stats[3].base_stat+pokemon.stats[4].base_stat+pokemon.stats[5].base_stat}</h3>
-                    
-                        <RadarChart
-                            cx={300}
-                            cy={250}
-                            outerRadius={150}
-                            width={500}
-                            height={500}
-                            data={dataState}
-                        >
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey="subject" stroke="#eeeeee" fill="#eeeeee" />
-                        <PolarRadiusAxis />
-                        <Radar
-                            name="State de Base"
-                            dataKey="A"
-                            isAnimationActive={true}
-                            stroke="#383bf0"
-                            fill="#383bf0"
-                            fillOpacity={0.6}
-                        />
-                        </RadarChart>
-                    </div>
-
-                    <br/>
-
-                    <div className="evolution">
-
-                        <NavLink to={evolution.chain && '/pokemon/'+getID( evolution.chain.species.url)}>
-                            <img 
-                                src={ evolution.chain && 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+ getID( evolution.chain.species.url)+'.png'} 
+                <section class="section about-section gray-bg" id="about">
+                    <div class="container">
+                        <div class="row align-items-center flex-row-reverse">
+                            <div class="col-lg-6">
+                                <div class="about-text go-to">
+                                    <h3 class="titre-color">{pokemon.name}</h3>
+                                    <h6 class="theme-color lead">N°{id}</h6>
+                                    <p>{species.flavor_text_entries && species.flavor_text_entries[0].flavor_text}</p>
+                                    <div class="row about-list">
+                                        <div class="col-md-6">
+                                            <div class="media">
+                                                <label>Type</label>
+                                                <p>{pokemon.types && pokemon.types[0].type.name} {typeDeux}</p>
+                                            </div>
+                                            <div class="media">
+                                                <label>Talents</label>
+                                                <p>{pokemon.abilities && listeTalent(pokemon.abilities)}</p>
+                                            </div>
+                                            <div class="media">
+                                                <label>Génération</label>
+                                                <p>{species.generation && species.generation.name}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="media">
+                                                <label>Taille</label>
+                                                <p>{pokemon.height && pokemon.height/10} m</p>
+                                            </div>
+                                            <div class="media">
+                                                <label>Poids</label>
+                                                <p>{pokemon.weight && pokemon.weight/10} Kg</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="about-avatar">
+                                <img 
+                            src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+id+'.png'} 
                             />
-                        </NavLink>
+                                </div>
+                            </div>
+                        </div>
 
-                        <h2>{evolution.chain && evolution.chain.species.name}</h2> 
-                        <h3>Niveau :{evolution.chain && evolution.chain.evolves_to[0].evolution_details[0].min_level}</h3>
 
-                        <NavLink to={evolution.chain && '/pokemon/'+getID( evolution.chain.evolves_to[0].species.url)}>
-                            <img 
-                                src={ evolution.chain && 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+ getID( evolution.chain.evolves_to[0].species.url)+'.png'} 
-                            />
-                        </NavLink>
+                        <div class="counter-poke">
+                            <div class="row">
+                                <div class="col-6 col-lg-4">
+                                    <div class="count-data text-center">
+                                        <h6 class="count h2">{pokemon && pokemon.base_experience}</h6>
+                                        <p class="m-0px font-w-600 p-noir">Experience de base</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-4">
+                                    <div class="count-data text-center">
+                                        <h6 class="count h2">{species && species.base_happiness}</h6>
+                                        <p class="m-0px font-w-600 p-noir">Bonheur de base</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-4">
+                                    <div class="count-data text-center">
+                                        <h6 class="count h2">{species && species.capture_rate}</h6>
+                                        <p class="m-0px font-w-600 p-noir">Taux de capture</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <h2>{evolution.chain && evolution.chain.evolves_to[0].species.name}</h2> 
-                        <h3>Niveau :{evolution.chain && evolution.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level}</h3>
+                        <div class="row align-items-center flex-row-reverse">
+                            <div class="col-lg-6">
+                                <div class="counter-poke">
+                                    <div class="row">
+                                        <h3 class="dark-color">Stats de base : </h3>
+                                        <h4 class="p-noir">Pv : {pokemon.stats && pokemon.stats[0].base_stat}</h4>
+                                        <h4 class="p-noir">Attaque : {pokemon.stats && pokemon.stats[1].base_stat}</h4>
+                                        <h4 class="p-noir">Défence : {pokemon.stats && pokemon.stats[2].base_stat}</h4>
+                                        <h4 class="p-noir">Attaque-Spé : {pokemon.stats && pokemon.stats[3].base_stat}</h4>
+                                        <h4 class="p-noir">Défence-Spé : {pokemon.stats && pokemon.stats[4].base_stat}</h4>
+                                        <h4 class="p-noir">Vitesse : {pokemon.stats && pokemon.stats[5].base_stat}</h4>
+                                        <h3 class="p-noir">Total : {pokemon.stats && pokemon.stats[0].base_stat+pokemon.stats[1].base_stat+pokemon.stats[2].base_stat+pokemon.stats[3].base_stat+pokemon.stats[4].base_stat+pokemon.stats[5].base_stat}</h3>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <div class="col-lg-6">
+                            <RadarChart
+                                    cx={300}
+                                    cy={250}
+                                    outerRadius={150}
+                                    width={500}
+                                    height={500}
+                                    data={dataState}
+                                >
+                                <PolarGrid />
+                                <PolarAngleAxis dataKey="subject" stroke="#eeeeee" fill="#eeeeee" />
+                                <PolarRadiusAxis />
+                                <Radar
+                                    name="State de Base"
+                                    dataKey="A"
+                                    isAnimationActive={true}
+                                    stroke="#383bf0"
+                                    fill="#383bf0"
+                                    fillOpacity={0.6}
+                                />
+                                </RadarChart>
+                            </div>
+                        </div>
+                        
 
-                        <NavLink to={evolution.chain && '/pokemon/'+getID( evolution.chain.evolves_to[0].evolves_to[0].species.url)}>
-                            <img 
-                                src={ evolution.chain && 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+ getID( evolution.chain.evolves_to[0].evolves_to[0].species.url)+'.png'} 
-                            />
-                        </NavLink>
-                        <h2>{evolution.chain && evolution.chain.evolves_to[0].evolves_to[0].species.name}</h2> 
+                        <div class="row align-items-center flex-row-reverse">
+                            <div class="counter-poke">
+                                <div class="row">
+                                    <div class="col-6 col-lg-4">
+                                        <div class="count-data text-center">
+                                            <h2 class="p-noir">Faible contre</h2>
+                                            <h6 class="count h2" id="faible"></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-lg-4">
+                                        <div class="count-data text-center">   
+                                            <h2  class="p-noir">Résistant contre</h2>
+                                            <h6 class="count h2" id="resistant"></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-lg-4">
+                                        <div class="count-data text-center">
+                                            <h2  class="p-noir">Dégâts normaux</h2>
+                                            <h6 class="count h2" id="normaux"></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-
-                    <br/>
-
-                    <div className="degas">
-                            <h4 id="dega" ></h4>
-                    </div>
-                </div>
+                </section>
             </div>}
         </div>
     );
@@ -217,22 +254,47 @@ function getDegaType(types){
     type.set("fairy", [1,1,1,1,1,1,0.5,2,1,1,1,0.5,1,1,0,0.5,2,1]);
 
     var ret = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-    var lesType = ["normal","fire","water","grass","electric","ice","fighting","poison","ground","flying","psychic","bug","rock","ghost","dragon","dark", "steel","fairy"]
+    var lesType = ["Normal","Feu","Eau","Plante","Electrik","Glace","Combat","Poisson","Sol","Vol","Psy","Insecte","Roche","Spectre","Dragon","Ténèbre", "Acier","Fée"]
+
     for (let y = 0; y < types.length; y++) {
         for (let index = 0; index < 17; index++) {
             ret[index] = ret[index]*type.get(types[y])[index]
         }
     } 
-    const element = document.getElementById("dega");
-    element.innerHTML = "New Heading";
-    var texte = ""
+    const faible = document.getElementById("faible");
+    const resistant = document.getElementById("resistant");
+    const normaux = document.getElementById("normaux");
+
+
+    var texteFaible = ""
+    var texteResistant = ""
+    var texteNormaux = ""
+
     for (let y = 0; y < ret.length; y++) {
-       texte=texte+"<h4>"+lesType[y]+" : "+ret[y]+"</h4>"
+        if(ret[y]>=2){
+            texteFaible=texteFaible+"<h4>"+lesType[y]+" : x"+ret[y]+"</h4>"
+        }else if(ret[y]<1){
+            texteResistant=texteResistant+"<h4>"+lesType[y]+" : x"+ret[y]+"</h4>"
+        }else{
+            texteNormaux=texteNormaux+"<h4>"+lesType[y]+" : x"+ret[y]+"</h4>"
+        }
+       
     }
     
-    element.innerHTML = texte;
-    return texte
+    faible.innerHTML = texteFaible;
+    resistant.innerHTML = texteResistant;
+    normaux.innerHTML = texteNormaux;
+    return texteFaible
 
+}
+
+function getEvolutions(evolution) {
+    let LesEvolution = new Array();
+    LesEvolution.push([evolution.chain.species.name,getID(evolution.chain.species.url)])
+    if(evolution.chain.evolves_to != ""){
+        LesEvolution.push(evolution.chain.evolves_to[0].species && [evolution.chain.evolves_to[0].species.name,getID(evolution.chain.evolves_to[0].species.url)])
+    }
+    console.log(LesEvolution)
 }
 
 export default Fiche;

@@ -10,7 +10,7 @@ const Pokemons = () => {
 
     useEffect(() => {
         axios
-            .get(`https://pokeapi.co/api/v2/pokemon?limit=905`)
+            .get(`https://pokeapi.co/api/v2/pokemon?limit=2000`)
             .then((res) => setData(res.data.results));
     }, [search])
     
@@ -48,7 +48,7 @@ const Pokemons = () => {
                 <input 
                     type="range" 
                     min="1" 
-                    max="905" 
+                    max="2000" 
                     defaultValue={rangeValue} 
                     onChange={(e)=> setRangeValue(e.target.value)}>
                 </input>
